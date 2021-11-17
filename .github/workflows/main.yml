@@ -32,10 +32,10 @@ jobs:
         env:
           SWAGGER_API_KEY: ${{secrets.SWAGGERHUB_API_KEY}}
         run: |
-          swaggerhub api:get API_DESIGN_API/payment-pre_authorisation_api/1.0
+          swaggerhub api:get Demo_DR1/payment-pre_authorisation_api/1.0
       - name: Validate definition
         env:
           SWAGGER_API_KEY: ${{secrets.SWAGGERHUB_API_KEY}}
         run: |
-          swaggerhub api:validate API_DESIGN_API/payment-pre_authorisation_api/1.0
+          swaggerhub api:validate Demo_DR1/payment-pre_authorisation_api/1.0
 
