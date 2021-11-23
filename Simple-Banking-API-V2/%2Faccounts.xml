@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:resource id="2ae29c57-44ed-4a10-ba67-55b9eb21660a" name="/accounts" path="/accounts" xmlns:con="http://eviware.com/soapui/config">
+<con:resource id="2ae29c57-44ed-4a10-ba67-55b9eb21660a" name="/accounts" path="/accounts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config">
   <con:settings>
     <con:setting id="2ae29c57-44ed-4a10-ba67-55b9eb21660afileName">%2Faccounts</con:setting>
   </con:settings>

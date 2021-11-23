@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project abortOnError="false" activeEnvironment="virt-server" created="3.10.0" encryptionMode="Not encrypted" id="ca7e0de5-f842-4af3-9603-63bce9b7a2c8" name="ADO-Functional-Test-Adv" resourceRoot="" runType="SEQUENTIAL" updated="3.10.0" xmlns:con="http://eviware.com/soapui/config">
+<con:soapui-project abortOnError="false" activeEnvironment="virt-local" created="3.10.0" encryptionMode="Not encrypted" id="ca7e0de5-f842-4af3-9603-63bce9b7a2c8" name="ADO-Functional-Test-Adv" resourceRoot="" runType="SEQUENTIAL" updated="3.10.0" xmlns:con="http://eviware.com/soapui/config">
   <con:settings>
     <con:setting id="ca7e0de5-f842-4af3-9603-63bce9b7a2c8fileName"/>
   </con:settings>

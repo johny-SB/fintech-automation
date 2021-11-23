@@ -4,6 +4,14 @@
     <con:setting id="e76419fc-ff5e-45f0-a7f1-1fd187ebe69afileName">Test-Case-1</con:setting>
   </con:settings>
   <con:savedRecentRuns>1</con:savedRecentRuns>
+  <con:testStep type="VirtRunnerTestStep" name="Virtual Service Runner" id="018a2918-d77e-42ef-88e0-81b849e352c5">
+    <con:settings/>
+    <con:config>
+      <url>localhost</url>
+      <server>ADO Virt Service</server>
+      <action>run</action>
+    </con:config>
+  </con:testStep>
   <con:testStep id="8bbac617-ea9c-46ae-895c-6309a209f5a7" name="REST Request 1" type="restrequest">
     <con:settings/>
     <con:config xsi:type="con:RestRequestStep" methodName="addaccounts" resourcePath="/MConneely/Banking-API/2.0.0/accounts" service="Simple Banking API V2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -93,6 +101,14 @@
           </con:entry>
         </con:environmentSpec>
       </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="VirtRunnerTestStep" name="Virtual Service Runner 2" id="ad322906-fd32-4798-811f-5dfa281326a8">
+    <con:settings/>
+    <con:config>
+      <url>localhost</url>
+      <server>ADO Virt Service</server>
+      <action>stop</action>
     </con:config>
   </con:testStep>
   <con:properties/>
