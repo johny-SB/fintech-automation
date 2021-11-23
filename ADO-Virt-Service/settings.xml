@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:restMockService host="localhost" id="aa2ff6ea-5cb5-4e2a-848b-4640e7148693" name="ADO Virt Service" path="/" port="8084" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings>
+    <con:setting id="9e6229ee-0701-4096-be42-39efcd9d546dfileName">ADO-Virt-Service</con:setting>
+    <con:setting id="aa2ff6ea-5cb5-4e2a-848b-4640e7148693fileName">ADO-Virt-Service</con:setting>
+  </con:settings>
+  <con:properties/>
+  <con:constraints>
+    <con:congestion>0</con:congestion>
+    <con:inputBandwidth>-1</con:inputBandwidth>
+    <con:outputBandwidth>-1</con:outputBandwidth>
+    <con:maxThreadPoolCapacity>20</con:maxThreadPoolCapacity>
+    <con:coreThreadPoolCapacity>5</con:coreThreadPoolCapacity>
+    <con:virtError>
+      <con:start>0</con:start>
+      <con:endless>true</con:endless>
+    </con:virtError>
+  </con:constraints>
+  <con:headerValidator type="NONE"/>
+</con:restMockService>

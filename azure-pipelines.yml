@@ -1,0 +1,88 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- api-lifecycle-jobs
+
+pool:
+ name: Default
+# pool: 
+#    vmImage: ubuntu-latest
+variables:
+  SWAGGERHUB_API_KEY: $(sh-key)
+  
+stages:
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - task: NodeTool@0
+      displayName: Node install
+      inputs:
+        versionSpec: '12.x' # The version we're installing
+    - script: |
+        npm install
+        npm run build
+      displayName: 'NPM install and build'
+      workingDirectory: '$(Build.SourcesDirectory)'
+    - script: npm install node-curl-cli -g
+      displayName: 'Install curl'     
+
+
+- stage: Test
+  jobs:
+  - job: StartVirtualService
+    displayName: Start Virtual Service
+    steps:  
+    - script:   curl -o virtserver-cli-1.10.0.jar https://dl.eviware.com/virtserver/virtserver-cli-1.10.0.jar
+      displayName: 'Get VirtServer Jar'
+    - script: java -jar ./virtserver-cli-1.10.0.jar -login -s $(virt-server-prod-address) -u $(virt-server-prod-user) -pw $(virt-server-prod-passw)
+      displayName: 'Log in to VirtServer'
+    - script: java -jar ./virtserver-cli-1.10.0.jar -startwt "adoVirtService" -s $(virt-server-prod-address)
+      displayName: 'Start VirtServer' 
+
+
+  - job: ValidateSwaggerHub
+    displayName: Validate SwaggerHub API
+    dependsOn: StartVirtualService
+    steps:
+      - script:   npm install swaggerhub-cli -g
+        displayName: 'Install SwaggerHub  CLI'
+      - script: swaggerhub api:get MConneely/Banking-API/2.0.0
+        displayName: 'Get SwaggerHub API via CLI'
+      - script: swaggerhub api:get MConneely/Banking-API/2.0.0
+        displayName: 'Validate SwaggerHub API via CLI'
+  
+  - job: RunTests
+    displayName: Run ReadyAPI Tests via TestEngine
+    dependsOn: ValidateSwaggerHub
+    steps:
+    - script: npm install testengine-cli -g
+      displayName: 'Install TestEngine CLI'
+    - script:  testengine -u $(te-prod-user) -p $(te-prod-pw) -H $(te-prod-address) run project $(Build.SourcesDirectory)
+      displayName: 'Execute tests via TestEngine CLI'
+  
+  - job: StopVirtualService
+    dependsOn: RunTests
+    displayName: Stop Virtual Service
+    steps: 
+    - script:   curl -o virtserver-cli-1.10.0.jar https://dl.eviware.com/virtserver/virtserver-cli-1.10.0.jar
+      displayName: 'Get VirtServer Jar'
+    - script: java -jar ./virtserver-cli-1.10.0.jar -login -s $(virt-server-prod-address) -u $(virt-server-prod-user) -pw $(virt-server-prod-passw)
+      displayName: 'Log in to VirtServer'  
+    - script: java -jar ./virtserver-cli-1.10.0.jar -stopwt "adoVirtService" -s $(virt-server-prod-address)
+      displayName: 'Stop VirtServer' 
+
+- stage: Publish
+  jobs:
+  - job: PublishAPI
+    displayName: Publish SwaggerHub API
+    steps:
+      - script:   npm install swaggerhub-cli -g
+        displayName: 'Install SwaggerHub  CLI'
+      - script: swaggerhub api:publish MConneely/Banking-API/2.0.0
+        displayName: 'Publish SwaggerHub API'
+      - script: swaggerhub api:setdefault MConneely/Banking-API/2.0.0
+        displayName: 'Set SwaggerHub API as Default'
