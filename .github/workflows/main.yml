@@ -30,4 +30,5 @@ jobs:
           npm install testengine-cli -g
       - name : Execute tests via TestEngine CLI
         run: |
-          testengine -u admin -p admin -H http://localhost:8080 run project C:\Users\dhiraj.rajotia\OneDrive - SmartBear Software, Inc\Documents\Projects\TEJenkinsGitRAPI\Weather-Composite_proj.zip      - name: Validate definition
+          testengine -u admin -p admin -H http://localhost:8080 run project C:\\Users\\dhiraj.rajotia\\OneDrive - SmartBear Software, Inc\\Documents\\Projects\\TEJenkinsGitRAPI\\Weather-Composite_proj.zip     
+
