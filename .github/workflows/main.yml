@@ -39,3 +39,18 @@ jobs:
         run: |
           swaggerhub api:validate Demo_DR1/payment-pre_authorisation_api/1.0
 
+  Run-Tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Nodejs 12.x
+        uses: actions/setup-node@v1
+        with:
+          node -version: "12.x"
+      - name : Install testengine CLI
+        run: |
+          npm install testengine-cli -g
+      - name : Execute tests via TestEngine CLI
+        run: |
+          testengine admin -p admin -H http://localhost:8080 run project C:\Users\dhiraj.rajotia\OneDrive - SmartBear Software, Inc\Documents\Projects\TEJenkinsGitRAPI\Weather-Composite_proj.zip      - name: Validate definition
